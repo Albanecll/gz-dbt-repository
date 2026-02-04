@@ -2,7 +2,10 @@ version: 2
 
 sources:
   - name: raw
+    database: beaming-ring-485210-b4
     schema: gz_raw_data
+    loader: bigquery
+    description: "raw sources from bigquery"
 
     tables:
       - name: sales
