@@ -5,14 +5,57 @@ sources:
     database: beaming-ring-485210-b4
     schema: gz_raw_data
     loader: bigquery
-    description: "raw sources from bigquery"
+    description: "Raw data coming from BigQuery"
 
     tables:
+
       - name: sales
         identifier: raw_gz_sales
+        description: "Sales data with one row per product per order"
+        loaded_at_field: date_date
+
+        columns:
+          - name: date_date
+            description: "Date of the purchase"
+
+          - name: orders_id
+            description: "Unique identifier of the order"
+
+          - name: pdt_id
+            description: "Unique identifier of the product"
+
+          - name: revenue
+            description: "Revenue generated for the product"
+
+          - name: quantity
+            description: "Quantity sold"
+
 
       - name: product
         identifier: raw_gz_product
+        description: "Product catalog with purchase prices"
+
+        columns:
+          - name: products_id
+            description: "Unique product identifier"
+
+          - name: purchse_price
+            description: "Purchase price of the product"
+
 
       - name: ship
         identifier: raw_gz_ship
+        description: "Shipping data for each order"
+
+        columns:
+          - name: orders_id
+            description: "Unique identifier of the order"
+
+          - name: shipping_fee
+            description: "Shipping fee charged to the customer"
+
+          - name: logcost
+            description: "Logistic cost of the shipment"
+
+          - name: ship_cost
+            description: "Cost of shipping"
