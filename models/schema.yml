@@ -14,6 +14,12 @@ sources:
         description: "Sales data with one row per product per order"
         loaded_at_field: date_date
 
+        tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - orders_id
+              - pdt_id
+
         columns:
           - name: date_date
             description: "Date of the purchase"
@@ -38,7 +44,10 @@ sources:
         columns:
           - name: products_id
             description: "Unique product identifier"
-
+            tests:
+              - unique
+              - not_null
+              
           - name: purchse_price
             description: "Purchase price of the product"
 
@@ -50,6 +59,9 @@ sources:
         columns:
           - name: orders_id
             description: "Unique identifier of the order"
+            tests:
+              - unique
+              - not_null
 
           - name: shipping_fee
             description: "Shipping fee charged to the customer"
