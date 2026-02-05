@@ -163,3 +163,16 @@ models:
             - date_date
             - paid_source
 
+#test finance_campaigns_days
+
+  - name: finance_campaigns_day
+    description: "Daily finance KPIs joined with daily ads performance, including ads_margin"
+
+    columns:
+      - name: date
+        tests: [not_null, unique]
+
+      - name: ads_margin
+        tests: [not_null]
+
+
