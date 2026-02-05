@@ -87,3 +87,46 @@ sources:
 
       - name: facebook
         identifier: raw_gz_facebook
+
+
+
+models:
+  - name: int_campaigns
+    description: "Unified campaigns table (union all of adwords, bing, criteo, facebook staging models)"
+    
+    columns:
+      # Primary key ( date + campaign_name + source)
+      - name: date_date
+        description: "Campaign date"
+        tests: [not_null]
+        
+      - name: campaign_name
+        description: "Campaign name"
+        tests: [not_null]
+
+      - name: paid_source
+        description: "Marketing source (adwords/bing/criteo/facebook)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['adwords','bing','criteo','facebook']
+
+      # Tests pertinents sur les métriques
+      - name: ads_cost
+        description: "Advertising cost"
+        tests: [not_null]
+
+      - name: impressions
+        description: "Number of impressions"
+        tests: [not_null]
+
+      - name: clicks
+        description: "Number of clicks"
+        tests: [not_null]
+  
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - date_date
+            - campaign_name
+            - source
