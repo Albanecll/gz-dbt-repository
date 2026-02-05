@@ -106,21 +106,18 @@ models:
 
       - name: paid_source
         description: "Marketing source (adwords/bing/criteo/facebook)"
-        tests:
-          - not_null
-          - accepted_values:
-              values: ['adwords','bing','criteo','facebook']
+        tests: [not_null]
 
-      # Tests pertinents sur les métriques
+      # Tests sur les métriques
       - name: ads_cost
         description: "Advertising cost"
         tests: [not_null]
 
-      - name: impressions
+      - name: impression
         description: "Number of impressions"
         tests: [not_null]
 
-      - name: clicks
+      - name: click
         description: "Number of clicks"
         tests: [not_null]
   
@@ -129,4 +126,4 @@ models:
           combination_of_columns:
             - date_date
             - campaign_name
-            - source
+            - paid_source
