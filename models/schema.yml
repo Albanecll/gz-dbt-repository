@@ -91,6 +91,9 @@ sources:
 
 
 models:
+
+#test int_campaigns
+
   - name: int_campaigns
     description: "Unified campaigns table (union all of adwords, bing, criteo, facebook staging models)"
     
@@ -127,3 +130,36 @@ models:
             - date_date
             - campaign_name
             - paid_source
+
+#test int_campaigns_days
+
+  - name: int_campaigns_day
+    description: "Daily aggregated marketing campaigns metrics (from int_campaigns)"
+
+    columns:
+      - name: date_date
+        description: "Day"
+        tests: [not_null]
+
+      - name: paid_source
+        description: "Marketing source"
+        tests: [not_null]
+
+      - name: ads_cost
+        description: "Total daily ads cost"
+        tests: [not_null]
+
+      - name: impression
+        description: "Total daily impressions"
+        tests: [not_null]
+
+      - name: click
+        description: "Total daily clicks"
+        tests: [not_null]
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - date_date
+            - paid_source
+
