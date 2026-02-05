@@ -45,8 +45,8 @@ select
   f.log_cost,
   f.ship_cost
 
-from finance f
-left join campaigns c
+from campaigns c
+left join finance f
   on c.date_date = f.date
 
 order by f.date desc
